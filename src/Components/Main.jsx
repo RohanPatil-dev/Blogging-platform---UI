@@ -8,6 +8,7 @@ import Navbar from "./Navbar"
 import Author from "./Author"
 import User from "./User"
 import Blogpage from "./Blogpage"
+import Update from "./Update"
 
 export default function Main() {
   return (
@@ -20,6 +21,7 @@ export default function Main() {
             <Route path="/author" element={<Author />} />
             <Route path="/user" element={<User />} />
             <Route path="/blogPage/:id" element={<Blogpage />} />
+            <Route path="/updateBlog/:id" element={<Update />} />
           </Route>
 
           {/* <Route path="/author" element={<Author />} />

@@ -1,5 +1,6 @@
 import axios from "axios"
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 export default function Author() {
 
@@ -44,6 +45,18 @@ export default function Author() {
     })
   }
 
+
+  function deleteBlog(id) {
+      axios.delete(`http://localhost:8081/blogs/deleteData/${id}`,{
+        headers : {
+           Authorization : `Bearer ${token}`
+        }
+      }).then((value)=>{
+          console.log(value);
+      })
+  }
+
+
   return (
     <>
       <div id="blog-writer">
@@ -71,15 +84,20 @@ export default function Author() {
                   <div className="card-body">
                     <h5 className="card-title">{value.title}</h5>
                     <p className="card-text">{value.description}</p>
-                    <a href="#" className="btn btn-danger">Delete Blog</a>
+                    <a href="#" className="btn btn-danger" onClick={()=>{return deleteBlog(value._id)}}>Delete Blog</a>
+                    <Link to={`/updateBlog/${value._id}`} className="btn btn-success ml-3">Update Blog</Link>
                   </div>
                 </div>
               </>
             )
           })
         }
-
       </div>
+
+            <div>
+                   
+
+            </div>
     </>
   )
 }
