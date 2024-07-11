@@ -9,8 +9,8 @@ export default function Update() {
 
         const [data, setData] = useState([])
 
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+    const [title, setTitle] = useState(data.title)
+    const [description, setDescription] = useState(data.description)
 
     const {id} = useParams()
 
@@ -19,27 +19,27 @@ export default function Update() {
     console.log("description",description);
 
 
-    useEffect(()=>{
-        blogData()
-      },[])
+    // useEffect(()=>{
+    //     blogData()
+    //   },[])
 
 
-    function blogData() {
-        const token = localStorage.getItem("uid")
+    // function blogData() {
+    //     const token = localStorage.getItem("uid")
 
-        axios.get(`http://localhost:8081/blogs/singleData/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }).then((value)=>{
-             console.log(value);
-             setData(value.data.allData)
-        })
-      }
+    //     axios.get(`http://localhost:8081/blogs/singleData/${id}`, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`
+    //       }
+    //     }).then((value)=>{
+    //          console.log(value);
+    //          setData(value.data.allData)
+    //     })
+    //   }
   
 
-    function updateBlog(id) {
-        axios.put(`http://localhost:8081/blogs/updateData/${id}`,{title,description},{
+    function updateBlog() {
+        axios.put(`http://localhost:8081/blogs/updateData/${id}`,{title : title,description : description},{
           headers : {
              Authorization : `Bearer ${token}`
           }
@@ -53,12 +53,12 @@ export default function Update() {
     <form action="" onSubmit={updateBlog}>
       <div className="form-group">
         <label htmlFor="exampleFormControlInput1" style={{ fontSize: "25px", fontWeight: "600" }}>Blog title</label>
-        <input type="text" className="form-control" value={data.title} onChange={(event) => { return setTitle(event.target.value) }} id="exampleFormControlInput1" placeholder="Enter your blog title" />
+        <input type="text" className="form-control" value={title} onChange={(event) => { return setTitle(event.target.value) }} id="exampleFormControlInput1" placeholder="Enter your blog title" />
       </div>
 
       <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1" style={{ fontSize: "25px", fontWeight: "600" }}>Blog Description</label>
-        <textarea className="form-control" value={data.description} onChange={(event) => { return setDescription(event.target.value) }} id="exampleFormControlTextarea1" rows="3" style={{ height: "300px", overflow: "auto", resize: "none" }} placeholder="Enter your blog description"></textarea>
+        <textarea className="form-control" value={description} onChange={(event) => { return  setDescription(event.target.value) }} id="exampleFormControlTextarea1" rows="3" style={{ height: "300px", overflow: "auto", resize: "none" }} placeholder="Enter your blog description"></textarea>
       </div>
 
       <button type="submit" className="btn btn-primary blogger">Submit</button>
