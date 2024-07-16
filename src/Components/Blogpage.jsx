@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react"
 
+import { ToastContainer, toast } from "react-toastify"
+
 import { useParams } from "react-router-dom"
 
 export default function Blogpage() {
@@ -10,6 +12,11 @@ export default function Blogpage() {
   const [comments, setComments] = useState([])
 
   const [addComment, setAddComments] = useState("")
+
+  const [height, setHeight] = useState("460px")
+  const [overflow, setOverflow] = useState("hidden")
+
+  const [hover, setHover] = useState("blue");
 
   useEffect(() => {
     blogData()
@@ -29,14 +36,18 @@ export default function Blogpage() {
 
 
   function blogData() {
-    axios.get(`http://localhost:8081/blogs/singleData/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((value) => {
-      console.log(value);
-      setData(value.data.allData)
-    })
+    try {
+      axios.get(`http://localhost:8081/blogs/singleData/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((value) => {
+        console.log(value);
+        setData(value.data.allData)
+      })
+    } catch (error) {
+      toast.error(`Error is ${error}`)
+    }
   }
 
   const value = {
@@ -44,38 +55,66 @@ export default function Blogpage() {
   }
 
   function addComments() {
-    axios.post(`http://localhost:8081/comments/blog/${id}/reviews`, value, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((value) => {
-      console.log(value);
-    })
+    try {
+      axios.post(`http://localhost:8081/comments/blog/${id}/reviews`, value, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((value) => {
+        console.log(value);
+        toast.success("Comment added Successfully !")
+      })
+    } catch (error) {
+      toast.error(`Error is ${error}`)
+    }
   }
 
   function showComments() {
-    axios.get(`http://localhost:8081/comments/blog/${id}/reviews`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((value) => {
-      console.log(value.data);
-      setComments(value.data)
-    })
+    try {
+      axios.get(`http://localhost:8081/comments/blog/${id}/reviews`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((value) => {
+        console.log(value.data);
+        setComments(value.data);
+      })
+    } catch (error) {
+
+    }
+  }
+
+  function manageHeight() {
+    if (height === "460px") {
+      setHeight(null)
+      setOverflow("none")
+
+      setHover("red")
+    } else {
+      setHeight("460px")
+      setOverflow("hidden")
+      setHover("blue")
+    }
   }
 
   return (
     <>
-      <div className="blog">
+      <ToastContainer />
+      <div className="blog" style={{ height: height, overflow: overflow }}>
+        <img src="./Images/blogging.jpeg" alt="" height="400px" width="800px" style={{ marginLeft: "100px", marginTop: "20px" }} />
         <div className="title">{data.title}</div>
 
-        <div className="description">{data.description}</div>
+        <div className="description" style={{ width: "65rem" }}>{data.description}</div>
       </div>
+
+      <button type="button" className={`btn btn-success manage ${hover}`} onClick={() => { manageHeight() }}>Read More</button>
+
+      <div id="underline"></div>
 
       <div id="comments">
         <form onSubmit={addComments}>
           <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1" style={{ fontSize: "25px", fontWeight: "600" }}>Write comments</label>
+            <label htmlFor="exampleFormControlTextarea1" style={{ fontSize: "40px", fontWeight: "600" }}>Write comments</label>
             <textarea className="form-control" value={addComment} onChange={(event) => { return setAddComments(event.target.value) }} style={{ overflow: "auto", resize: "none" }} placeholder="Enter your comments..............."></textarea>
           </div>
 
@@ -90,9 +129,11 @@ export default function Blogpage() {
             comments.map((value) => {
               return (
                 <>
-                  <div className="comment-box">
-                    <p>USER ID : <span>{value._id}</span></p>
-                    <p>USER COMMENT : <span>{value.content}</span></p>
+                  <div class="card" style={{ width: "22rem" }}>
+                    <div class="card-body">
+                      <p>Comment ID : <span>{value._id}</span></p>
+                      <p>USER COMMENT : <span>{value.content}</span></p>
+                    </div>
                   </div>
                 </>
               )

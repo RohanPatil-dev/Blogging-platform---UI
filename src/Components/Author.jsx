@@ -2,6 +2,8 @@ import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
+import { ToastContainer, toast } from "react-toastify"
+
 export default function Author() {
 
   const [title, setTitle] = useState("")
@@ -23,42 +25,57 @@ export default function Author() {
 
   function postBlog(event) {
     event.preventDefault()
-
+    try {
+      
     axios.post("http://localhost:8081/blogs/addBlogs", data, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).then((value) => {
       console.log(value);
+      toast.success("Blog added successfully !")
     })
+    } catch (error) {
+      toast.error(`Error is ${error}`)
+    }
   }
 
 
   function renderBlog() {
-    axios.get("http://localhost:8081/blogs/renderBlog", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((value) => {
-      console.log(value.data.allData);
-      setBlog(value.data.allData)
-    })
+     try {
+      axios.get("http://localhost:8081/blogs/renderBlog", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((value) => {
+        console.log(value.data.allData);
+        setBlog(value.data.allData)
+      })
+     } catch (error) {
+      toast.error(`Error is ${error}`)
+     }
   }
 
 
   function deleteBlog(id) {
-      axios.delete(`http://localhost:8081/blogs/deleteData/${id}`,{
-        headers : {
-           Authorization : `Bearer ${token}`
-        }
-      }).then((value)=>{
-          console.log(value);
-      })
+       try {
+        axios.delete(`http://localhost:8081/blogs/deleteData/${id}`,{
+          headers : {
+             Authorization : `Bearer ${token}`
+          }
+        }).then((value)=>{
+            console.log(value);
+            toast.success("Blog deleted successfully !")
+        })
+       } catch (error) {
+        toast.error(`Error is ${error}`)
+       }
   }
 
 
   return (
     <>
+          <ToastContainer />
       <div id="blog-writer">
         <form action="" onSubmit={postBlog}>
           <div className="form-group">
@@ -80,12 +97,12 @@ export default function Author() {
           blog.map((value) => {
             return (
               <>
-                <div className="card" style={{ width: "18rem" }} key={value._id}>
+                <div className="card" style={{ width: "18rem"}} key={value._id}>
                   <div className="card-body">
-                    <h5 className="card-title">{value.title}</h5>
-                    <p className="card-text">{value.description}</p>
-                    <a href="#" className="btn btn-danger" onClick={()=>{return deleteBlog(value._id)}}>Delete Blog</a>
-                    <Link to={`/updateBlog/${value._id}`} className="btn btn-success ml-3">Update Blog</Link>
+                    <h5 className="card-title">{value.title.slice(0,30)}.....</h5>
+                    <p className="card-text">{value.description.slice(0,70)}.....</p>
+                    <a href="#" className="btn btn-danger delete" onClick={()=>{return deleteBlog(value._id)}}>Delete Blog</a>
+                    <Link to={`/updateBlog/${value._id}`} className="btn btn-success ml-3 update">Update Blog</Link>
                   </div>
                 </div>
               </>

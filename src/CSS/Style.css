@@ -1,71 +1,228 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-#navbar{
+#navbar {
     padding: 15px;
 }
 
-#nav-li{
+#nav-li {
     font-size: 18px;
     position: relative;
-    left: 75rem;
-}
-
-#signin,#signup{
-    border: 12px double rgb(45, 165, 216);
-    width: 600px;
-    padding: 40px;
-    margin: 100px 450px;
-    border-radius: 20px;
-}
-
-#blog-cards{
-    display: flex;
-    flex-direction: row;
-    gap: 20px 20px;
-    flex-wrap: nowrap;
-    margin-top: 50px;
-    margin-left: 140px;
-}
-
-.blog{
-     border: 2px solid black;
-     width: 70rem;
-     margin-left: 250px;
-     margin-top: 40px;
-     height: 600px;
-     overflow: auto;
-     padding: 10px;
-}
-
-.title{
-    position: relative;
-    font-size: 40px;
-    left: 65px;
+    left: 68rem;
     font-weight: 600;
 }
 
-.description{
+#nav-li a{
+    width: 100px;
+    text-align: center;
+}
+
+#nav-li a:hover{
+    animation-name: list;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+    border-radius: 20px;
+}
+
+@keyframes list {
+    0%{
+        border-right: 4px solid black;
+        border-color: yellow;
+    }
+    25%{
+        border-top: 4px solid black;
+        border-color: red;
+    }
+    50%{
+        border-left: 4px solid black;
+        border-color: green;
+    }
+    100%{
+        border-bottom: 4px solid black;
+        border-color: greenyellow;
+    }
+}
+
+#signin-background {
+    background: url("/public/Images/main.jpeg");
+    background-repeat: no-repeat;
+    height: 44rem;
+    background-size: 1500px 690px;
+}
+
+#logo {
+    height: 150px;
     position: relative;
-    left: 70px;
-    top: 50px;
-    font-size: 25px;
+    top: 30px;
+    left: 420px;
+    z-index: 1;
+}
+
+#signin {
+    position: relative;
+    bottom: 40px;
+    left: 200px;
+    width: 600px;
+    padding: 70px;
+    border-radius: 15%;
+    border-right: 15px solid rgb(77, 127, 235);
+    border-left: 15px solid rgb(77, 127, 235);
+    border-bottom: 20px solid rgb(77, 127, 235);
+    border-top: 20px solid rgb(77, 127, 235);
+}
+
+#signup {
+    position: relative;
+    top: 30px;
+    width: 600px;
+    padding: 70px;
+    border-radius: 15%;
+    border-right: 15px solid rgb(77, 127, 235);
+    border-left: 15px solid rgb(77, 127, 235);
+    border-bottom: 20px solid rgb(77, 127, 235);
+    border-top: 20px solid rgb(77, 127, 235);
+}
+
+#signup-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px 20px;
+}
+
+.signup-img {
+    position: relative;
+    top: 30px;
+
+    height: 600px;
+}
+
+.signin-input {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.signup-input {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#link {
+    font-size: 18px;
+    margin-left: 70px;
+}
+
+#link a:hover {
+    color: rebeccapurple;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.signin-btn {
+    width: 300px;
+    margin-left: 50px;
+    padding: 10px;
+    font-size: 23px;
+    font-weight: 700;
+    border-radius: 15px;
+    border: none;
+}
+
+.signin-btn {
+    background-color: #060606;
 }
 
 
-#blog-writer{
+#blog-header {
+    height: 500px;
+    background: url("/public/Images/blog-bar.jpg");
+    background-size: 100% 500px;
+    background-repeat: no-repeat;
+}
+
+#blog-cards {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 20px 20px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-bottom: 40px;
+}
+
+.user-card {
+    height: 220px;
+}
+
+.read-more-btn {
+    position: absolute;
+    left: 30px;
+    bottom: 10px;
+    background-color: #060606;
+    width: 200px;
+}
+
+.blog {
     border: 2px solid black;
+    width: 70rem;
+    margin-left: 250px;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+.title {
+    position: relative;
+    font-size: 40px;
+    left: 35px;
+    margin-top: 30px;
+    font-weight: 600;
+}
+
+.description {
+    position: relative;
+    left: 40px;
+    margin-top: 50px;
+    bottom: 40px;
+    font-size: 25px;
+}
+
+.manage {
+    position: relative;
+    bottom: 30px;
+    margin-top: 80px;
+    left: 300px;
+    padding: 10px;
+    width: 200px;
+    font-size: 20px;
+}
+
+.blue:hover{
+    background-color: rgb(45, 158, 228);
+}
+
+.red:hover{
+    background-color: rgb(246, 95, 41);
+}
+
+#underline {
+    background-image: linear-gradient(to left, red, green, purple, yellow);
+    height: 5px;
+}
+
+#blog-writer {
+    border: 1px solid rgb(163, 161, 161);
     padding: 30px;
     width: 50rem;
     margin-left: 370px;
     margin-top: 70px;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
-.blogger{
+.blogger {
     width: 300px;
     padding: 5px;
     font-size: 20px;
@@ -73,17 +230,34 @@
 }
 
 
-#allBlogs{
-    margin-top: 30px;
+#allBlogs {
     display: flex;
     flex-direction: row;
-     flex-wrap: nowrap;
-     gap: 20px 20px;
-     margin-left: 100px;
-     margin-bottom: 20px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 20px 20px;
+    margin-left: 100px;
+    margin-bottom: 20px;
 }
 
-#update-Data{
+#allBlogs .card{
+    position: relative;
+    height: 220px;
+    margin-bottom: 30px;
+}
+
+.card .delete{
+    position: absolute;
+    bottom: 10px;
+}
+
+.card .update{
+    position: absolute;
+    bottom: 10px;
+    left: 120px;
+}
+
+#update-Data {
     position: absolute;
     top: 300px;
     left: 200px;
@@ -91,25 +265,31 @@
     padding: 30px;
 }
 
-#comments{
+#comments {
     width: 60rem;
     margin-top: 60px;
     margin-left: 300px;
 }
 
 
-#comments .form-group textarea{
+#comments .form-group textarea {
     height: 100px;
 }
 
-.comments{
+.comments {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    display :"flex";
+    flex-direction : "row";
+    justify-content : "center";
+    align-items: center;
+    margin-top : 40px;
+    margin-left: 50px;
 }
 
-.comment-box{
+.comment-box {
     border: 2px solid black;
     width: 400px;
     font-size: 20px;
@@ -120,7 +300,7 @@
     border-radius: 20px;
 }
 
-.comment-box p{
+.comment-box p {
     margin-left: 30px;
     position: relative;
     top: 20px;

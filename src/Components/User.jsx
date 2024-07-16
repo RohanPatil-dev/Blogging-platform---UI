@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import axios from "axios"
 
@@ -30,15 +30,16 @@ export default function User() {
 
   return (
     <>
+      <div id="blog-header"></div>
       <div id="blog-cards">
         {data.map((value) => {
           return (
             <>
-              <div className="card" style={{ width: "18rem" }} key={value._id}>
+              <div className="card user-card" style={{ width: "18rem" }} key={value._id}>
                 <div className="card-body">
-                  <h5 className="card-title">{value.title}</h5>
-                  <p className="card-text">{value.description}</p>
-                  <Link to={`/blogPage/${value._id}`} className="btn btn-primary" onClick={() => {console.log(value._id);}}>Read More</Link>
+                  <h5 className="card-title">{value.title.slice(0, 30)}......</h5>
+                  <p className="card-text">{value.description.slice(0, 70)}......</p>
+                  <Link to={`/blogPage/${value._id}`} className="btn btn-primary read-more-btn" onClick={() => { console.log(value._id); }}>Read More</Link>
                 </div>
               </div>
             </>
