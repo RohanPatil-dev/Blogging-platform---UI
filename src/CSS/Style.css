@@ -6,6 +6,8 @@
 
 #navbar {
     padding: 15px;
+    /* border-bottom: 2px solid gray; */
+    box-shadow: 0px 2px 10px 4px gray;
 }
 
 #nav-li {
@@ -214,14 +216,13 @@
     height: 5px;
 }
 
-
-
 #blog-writer {
+    position: relative;
+    top: 30px;
     border: 1px solid rgb(163, 161, 161);
     padding: 30px;
     width: 50rem;
     margin-left: 370px;
-    margin-top: 0px;
     border-radius: 15px;
 }
 
@@ -326,3 +327,4 @@
     position: relative;
     top: 20px;
 }
+

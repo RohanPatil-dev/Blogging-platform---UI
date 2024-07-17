@@ -1,6 +1,8 @@
 import axios from "axios"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect,useLayoutEffect } from "react"
 import { Link } from "react-router-dom"
+
+import { DNA } from 'react-loader-spinner'
 
 import { ToastContainer, toast } from "react-toastify"
 
@@ -9,7 +11,17 @@ export default function Author(props) {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
+  const [loading,setLoading] = useState(false)
+
   const [blog, setBlog] = useState([])
+
+  useLayoutEffect(() => {
+      setLoading(true)
+
+      setTimeout(()=>{
+        setLoading(false)
+      },5000)
+  }, [])
 
   useEffect(() => {
     renderBlog()
@@ -76,6 +88,20 @@ export default function Author(props) {
   return (
     <>
       <ToastContainer />
+
+{
+  loading ?
+<div style={{backgroundColor: props.colors === "dark" ? "#333" : "#fff",height : "45rem"}}>
+    <DNA
+    visible={true}
+    height="360"
+    width="360"
+    ariaLabel="dna-loading"
+    wrapperStyle={{marginLeft: "530px",marginTop : "100px" }}
+    wrapperClass="dna-wrapper"
+    />
+</div>
+     : 
       <div className={`${props.colors === "light" ? "bg-light" : "bg-dark"} blog-writer-box`}>
         <div id="blog-writer" className={`${props.colors === "light" ? "text-dark" : "text-light"}`}>
           <form action="" onSubmit={postBlog}>
@@ -112,6 +138,7 @@ export default function Author(props) {
           }
         </div>
       </div>
+      }
     </>
   )
 }

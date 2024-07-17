@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect,useLayoutEffect } from "react"
 
 import { Link } from "react-router-dom"
+
+
+import { DNA } from 'react-loader-spinner'
 
 import axios from "axios"
 
 export default function User(props) {
 
   const [data, setData] = useState([])
+  
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     allBlogData()
   }, [])
+
+  useLayoutEffect(() => {
+    setLoading(true)
+
+    setTimeout(()=>{
+      setLoading(false)
+    },5000)
+}, [])
 
 
   function allBlogData() {
@@ -30,6 +43,21 @@ export default function User(props) {
 
   return (
     <>
+    
+{
+  loading ?
+<div style={{backgroundColor: props.colors === "dark" ? "#333" : "#fff",height : "45rem"}}>
+    <DNA
+    visible={true}
+    height="360"
+    width="360"
+    ariaLabel="dna-loading"
+    wrapperStyle={{marginLeft: "530px",marginTop : "100px" }}
+    wrapperClass="dna-wrapper"
+    />
+</div>
+     : 
+
       <div className={`${props.colors === "light" ? "bg-light" : "bg-dark"}`}>
         <div id="blog-header"></div>
         <div id="blog-cards">
@@ -52,7 +80,7 @@ export default function User(props) {
       </div>
     </div >
 
-
+      }
     {/* <div className="card" style={{ width: "18rem" }}>
         <div className="card-body">
           <h5 className="card-title">Card title</h5>

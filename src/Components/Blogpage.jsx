@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect,useLayoutEffect } from "react"
+
+import { DNA } from 'react-loader-spinner'
 
 import { ToastContainer, toast } from "react-toastify"
 
@@ -17,6 +19,16 @@ export default function Blogpage(props) {
   const [overflow, setOverflow] = useState("hidden")
 
   const [hover, setHover] = useState("blue");
+
+  const [loading,setLoading] = useState(false)
+
+  useLayoutEffect(() => {
+    setLoading(true)
+
+    setTimeout(()=>{
+      setLoading(false)
+    },5000)
+}, [])
 
   useEffect(() => {
     blogData()
@@ -100,6 +112,21 @@ export default function Blogpage(props) {
   return (
     <>
       <ToastContainer />
+
+      {
+  loading ?
+  <div style={{backgroundColor: props.colors === "dark" ? "#333" : "#fff",height : "45rem"}}>
+  <DNA
+  visible={true}
+  height="360"
+  width="360"
+  ariaLabel="dna-loading"
+  wrapperStyle={{marginLeft: "530px",marginTop : "100px" }}
+  wrapperClass="dna-wrapper"
+  />
+</div>
+     : 
+
       <div className={`${props.colors === "light" ? "bg-light" : "bg-dark"}`} style={{height: "97rem"}} >
       <div className={`blog ${props.colors === "light" ? "text-dark" : "text-light"}`} style={{ height: height, overflow: overflow }}>
         <img src="./Images/blogging.jpeg" alt="" height="400px" width="800px" style={{ marginLeft: "100px", marginTop: "20px" }} />
@@ -142,6 +169,7 @@ export default function Blogpage(props) {
         }
       </div>
       </div>
+}
     </>
   )
 }
