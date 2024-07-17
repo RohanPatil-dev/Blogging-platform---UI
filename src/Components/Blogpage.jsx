@@ -129,7 +129,8 @@ export default function Blogpage(props) {
 
       <div className={`${props.colors === "light" ? "bg-light" : "bg-dark"}`} style={{height: "97rem"}} >
       <div className={`blog ${props.colors === "light" ? "text-dark" : "text-light"}`} style={{ height: height, overflow: overflow }}>
-        <img src="./Images/blogging.jpeg" alt="" height="400px" width="800px" style={{ marginLeft: "100px", marginTop: "20px" }} />
+        <img src={`http://localhost:8081/uploads/${data.coverImage}`} alt={`${data.coverImage}`} height="400px" width="800px" style={{ marginLeft: "100px", marginTop: "20px" }} />
+        
         <div className="title">{data.title}</div>
 
         <div className="description" style={{ width: "65rem" }}>{data.description}</div>

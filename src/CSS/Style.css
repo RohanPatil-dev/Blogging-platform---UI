@@ -170,7 +170,8 @@
 
 .blog {
     position: relative;
-    border: 2px solid black;
+    border: 10px double rgb(236, 135, 135);
+    border-radius: 15px;
     width: 70rem;
     margin-left: 250px;
     top: 40px;
