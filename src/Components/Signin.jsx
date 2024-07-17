@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate } from "react-router-dom"
 
-export default function Signin() {
+export default function Signin(props) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")

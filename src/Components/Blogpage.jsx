@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify"
 
 import { useParams } from "react-router-dom"
 
-export default function Blogpage() {
+export default function Blogpage(props) {
 
   const [data, setData] = useState([])
 
@@ -100,7 +100,8 @@ export default function Blogpage() {
   return (
     <>
       <ToastContainer />
-      <div className="blog" style={{ height: height, overflow: overflow }}>
+      <div className={`${props.colors === "light" ? "bg-light" : "bg-dark"}`} style={{height: "97rem"}} >
+      <div className={`blog ${props.colors === "light" ? "text-dark" : "text-light"}`} style={{ height: height, overflow: overflow }}>
         <img src="./Images/blogging.jpeg" alt="" height="400px" width="800px" style={{ marginLeft: "100px", marginTop: "20px" }} />
         <div className="title">{data.title}</div>
 
@@ -114,7 +115,7 @@ export default function Blogpage() {
       <div id="comments">
         <form onSubmit={addComments}>
           <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1" style={{ fontSize: "40px", fontWeight: "600" }}>Write comments</label>
+            <label htmlFor="exampleFormControlTextarea1" className={`${props.colors === "light" ? "text-dark" : "text-light"}`} style={{ fontSize: "40px", fontWeight: "600" }}>Write comments</label>
             <textarea className="form-control" value={addComment} onChange={(event) => { return setAddComments(event.target.value) }} style={{ overflow: "auto", resize: "none" }} placeholder="Enter your comments..............."></textarea>
           </div>
 
@@ -129,7 +130,7 @@ export default function Blogpage() {
             comments.map((value) => {
               return (
                 <>
-                  <div class="card" style={{ width: "22rem" }}>
+                  <div class="card" style={{position : "relative",width: "22rem",height : "100px" }}>
                     <div class="card-body">
                       <p>Comment ID : <span>{value._id}</span></p>
                       <p>USER COMMENT : <span>{value.content}</span></p>
@@ -139,6 +140,7 @@ export default function Blogpage() {
               )
             })
         }
+      </div>
       </div>
     </>
   )

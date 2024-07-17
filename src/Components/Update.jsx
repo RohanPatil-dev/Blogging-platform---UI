@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 
 import { ToastContainer, toast } from "react-toastify"
 
-export default function Update() {
+export default function Update(props) {
 
   const token = localStorage.getItem("uid")
 
@@ -67,21 +67,22 @@ export default function Update() {
   return (
     <>
       <ToastContainer />
+      <div className={`${props.colors === "light" ? "bg-light" : "bg-dark"}`} style={{height: "44.7rem"}}>
+        <div id="blog-update" className={`${props.colors === "light" ? "text-dark" : "text-light"}`}>
+          <form action="" onSubmit={updateBlog}>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1" style={{ fontSize: "25px", fontWeight: "600" }}>Blog title</label>
+              <input type="text" className="form-control" value={title} onChange={(event) => { return setTitle(event.target.value) }} id="exampleFormControlInput1" placeholder="Enter your blog title" />
+            </div>
 
-      <div id="blog-writer">
-        <form action="" onSubmit={updateBlog}>
-          <div className="form-group">
-            <label htmlFor="exampleFormControlInput1" style={{ fontSize: "25px", fontWeight: "600" }}>Blog title</label>
-            <input type="text" className="form-control" value={title} onChange={(event) => { return setTitle(event.target.value) }} id="exampleFormControlInput1" placeholder="Enter your blog title" />
-          </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlTextarea1" style={{ fontSize: "25px", fontWeight: "600" }}>Blog Description</label>
+              <textarea className="form-control" value={description} onChange={(event) => { return setDescription(event.target.value) }} id="exampleFormControlTextarea1" rows="3" style={{ height: "300px", overflow: "auto", resize: "none" }} placeholder="Enter your blog description"></textarea>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1" style={{ fontSize: "25px", fontWeight: "600" }}>Blog Description</label>
-            <textarea className="form-control" value={description} onChange={(event) => { return setDescription(event.target.value) }} id="exampleFormControlTextarea1" rows="3" style={{ height: "300px", overflow: "auto", resize: "none" }} placeholder="Enter your blog description"></textarea>
-          </div>
-
-          <button type="submit" className="btn btn-primary blogger">Submit</button>
-        </form>
+            <button type="submit" className="btn btn-primary blogger">Submit</button>
+          </form>
+        </div>
       </div>
     </>
   )

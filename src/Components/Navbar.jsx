@@ -1,7 +1,7 @@
 import React from "react"
 import { Outlet, Link, useNavigate } from "react-router-dom"
 
-export default function Navbar() {
+export default function Navbar(props) {
 
     const token = localStorage.getItem("uid")
 
@@ -13,10 +13,14 @@ export default function Navbar() {
         navigate("/")
     }
 
+    function turnOn() {
+        props.colors === "light" ? props.setColors({ color: "dark", backgroundColor: "dark", text: "Dark mode enabled" }) : props.setColors({ color: "light", backgroundColor: "light", text: "Light Mode Enabled" })
+    }
+
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-                <Link className="navbar-brand" style={{fontSize : "25px",fontWeight : "bold",fontStyle :"oblique"}} to="#"><span style={{color : "red"}}>Blogger</span> APP</Link>
+            <nav className={`navbar navbar-expand-lg navbar-${props.colors} bg-${props.background} p-3 fontSize`} id="navbar">
+                <Link className="navbar-brand" style={{ fontSize: "25px", fontWeight: "bold", fontStyle: "oblique" }} to="#"><span style={{ color: "red" }}>Blogger</span> APP</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -28,6 +32,11 @@ export default function Navbar() {
                                 <li className="nav-item active">
                                     <Link className="nav-link" to="/" onClick={() => { logout() }}>Logout</Link>
                                 </li>
+
+
+                                <li className="nav-item active ml-3 mt-1">
+                                    <a to="#" style={{width : "170px",fontWeight : "600"}} className={`btn active text-${props.colors === "light" ? "dark" : "light"}`} role="button" aria-pressed="true" onClick={() => { turnOn() }}>{props.text}</a>
+                                </li>
                             </> :
                                 <>
                                     <li className="nav-item active">
@@ -38,7 +47,6 @@ export default function Navbar() {
                                     </li>
                                 </>
                         }
-
                     </ul>
                 </div>
             </nav>

@@ -11,7 +11,7 @@
 #nav-li {
     font-size: 18px;
     position: relative;
-    left: 68rem;
+    left: 62rem;
     font-weight: 600;
 }
 
@@ -151,7 +151,7 @@
     flex-wrap: wrap;
     margin-top: 50px;
     margin-left: 150px;
-    margin-bottom: 40px;
+   bottom: 20px;
 }
 
 .user-card {
@@ -167,10 +167,11 @@
 }
 
 .blog {
+    position: relative;
     border: 2px solid black;
     width: 70rem;
     margin-left: 250px;
-    margin-top: 40px;
+    top: 40px;
     padding: 10px;
 }
 
@@ -213,13 +214,29 @@
     height: 5px;
 }
 
+
+
 #blog-writer {
     border: 1px solid rgb(163, 161, 161);
     padding: 30px;
     width: 50rem;
     margin-left: 370px;
-    margin-top: 70px;
+    margin-top: 0px;
     border-radius: 15px;
+}
+
+#blog-update {
+    border: 1px solid rgb(163, 161, 161);
+    padding: 30px;
+    width: 50rem;
+    margin-left: 370px;
+    position: relative;
+    top: 40px;
+    border-radius: 15px;
+}
+
+#blog-writer form{
+    margin-top: 30px;
 }
 
 .blogger {
@@ -278,6 +295,7 @@
 
 .comments {
     display: flex;
+    position: relative;
     flex-direction: row;
     gap: 20px;
     flex-wrap: wrap;
@@ -285,8 +303,11 @@
     flex-direction : "row";
     justify-content : "center";
     align-items: center;
-    margin-top : 40px;
-    margin-left: 50px;
+    top: 50px;
+    left: 50px;
+    bottom: 100px;
+    overflow: auto;
+    height: 450px;
 }
 
 .comment-box {

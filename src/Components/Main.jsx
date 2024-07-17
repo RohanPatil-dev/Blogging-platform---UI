@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState} from "react"
 import Signin from "./Signin"
 
 import "../CSS/Style.css"
@@ -11,17 +11,26 @@ import Blogpage from "./Blogpage"
 import Update from "./Update"
 
 export default function Main() {
+
+  
+  const [colors, setColors] = useState({
+    color : "light",
+    backgroundColor : "light",
+    text : "Enable Dark Mode"
+  })
+
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route path="/" element={<Signin />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/author" element={<Author />} />
-            <Route path="/user" element={<User />} />
-            <Route path="/blogPage/:id" element={<Blogpage />} />
-            <Route path="/updateBlog/:id" element={<Update />} />
+          <Route path="/" element={<Navbar colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />}>
+            <Route path="/" element={<Signin colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />} />
+            <Route path="/signup" element={<SignUp colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />} />
+            <Route path="/author" element={<Author colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />} />
+            <Route path="/user" element={<User colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />} />
+            <Route path="/blogPage/:id" element={<Blogpage colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />} />
+            <Route path="/updateBlog/:id" element={<Update colors={colors.color} background={colors.backgroundColor} text={colors.text} setColors={setColors} />} />
           </Route>
 
           {/* <Route path="/author" element={<Author />} />
